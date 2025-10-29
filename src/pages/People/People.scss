@@ -1,0 +1,407 @@
+.people {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: inherit;
+  padding-right: 1em;
+
+  .people {
+    &__search {
+      width: 100%;
+      padding: 10px;
+      margin: 1em 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+    }
+
+    &__search-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 8px 12px;
+      background-color: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 4px;
+      color: #6c757d;
+      font-size: 14px;
+    }
+
+    &__clear-all-filters {
+      background: #dc3545;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+
+      &:hover {
+        background: #c82333;
+      }
+    }
+
+    &__header-content {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    &__filter-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    &__filter-input,
+    &__filter-select {
+      width: 100%;
+      padding: 4px 8px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 12px;
+      color: #fefefe;
+
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+    }
+
+    &__filter-clear {
+      position: absolute;
+      right: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #999;
+      font-size: 16px;
+      padding: 0;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        color: #dc3545;
+      }
+    }
+
+    &__no-results {
+      text-align: center;
+      padding: 40px;
+      color: #6c757d;
+      font-style: italic;
+      grid-column: 1 / -1;
+    }
+
+    &__info {
+      margin-top: 15px;
+      text-align: center;
+      color: #6c757d;
+      font-size: 14px;
+    }
+  }
+
+  // Адаптивность для мобильных устройств
+  @media (max-width: 768px) {
+    .people {
+      &__header-content {
+        font-size: 12px;
+      }
+
+      &__filter-input,
+      &__filter-select {
+        font-size: 11px;
+        padding: 2px 4px;
+      }
+
+      &__search-info {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+    }
+  }
+
+  &__header {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.8fr 1.2fr 0.8fr 0.8fr;
+    gap: 1px;
+    background: #f8fafc;
+    font-weight: 600;
+  }
+
+  &__body {
+    background: #f8fafc;
+    min-height: 280px;
+  }
+
+  &__row {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.8fr 1.2fr 0.8fr 0.8fr;
+    gap: 1px;
+    background: #fff;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    &:hover {
+      background: #f1f5f9;
+      transition: background-color 0.2s ease;
+    }
+  }
+
+  &__cell {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    box-sizing: border-box;
+
+    &--header {
+      background: #1e293b;
+      color: #fff;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    &:not(.people__cell--header) {
+      color: #334155;
+      font-size: 0.95rem;
+    }
+  }
+
+  // Стили для пагинации
+  &__pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    gap: 16px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+
+  &__pagination-btn {
+    padding: 10px 16px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    min-width: 100px;
+
+    &:hover:not(:disabled) {
+      background: #3b82f6;
+      color: #fff;
+      border-color: #3b82f6;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: #f3f4f6;
+    }
+
+    &--prev {
+      order: 1;
+    }
+
+    &--next {
+      order: 3;
+    }
+  }
+
+  &__pagination-pages {
+    display: flex;
+    gap: 8px;
+    order: 2;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+      order: 1;
+    }
+  }
+
+  &__pagination-page {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    min-width: 40px;
+
+    &:hover {
+      background: #f3f4f6;
+    }
+
+    &--active {
+      background: #3b82f6;
+      color: #fff;
+      border-color: #3b82f6;
+    }
+  }
+
+  &__info {
+    margin-top: 1em;
+    padding: 12px 20px;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+}
+
+// Адаптивность для мобильных устройств
+@media (max-width: 768px) {
+  .people {
+    border-radius: 8px;
+
+    &__header {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+                "id name"
+                "surname age"
+                "birthDate sex"
+                "children children";
+    }
+
+    &__row {
+
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+                "id name"
+                "surname age"
+                "birthDate sex"
+                "children children";
+    }
+
+    &__cell {
+
+      padding: 12px 16px;
+      min-height: 48px;
+
+      &:nth-child(1) { grid-area: id; }
+      &:nth-child(2) { grid-area: name; }
+      &:nth-child(3) { grid-area: surname; }
+      &:nth-child(4) { grid-area: age; }
+      &:nth-child(5) { grid-area: birthDate; }
+      &:nth-child(6) { grid-area: sex; }
+      &:nth-child(7) {
+        grid-area: children;
+        justify-content: center;
+      }
+    }
+
+    &__pagination {
+      padding: 16px;
+    }
+
+    &__pagination-btn {
+      min-width: 80px;
+      padding: 8px 12px;
+    }
+
+    &__pagination-page {
+      padding: 6px 10px;
+      min-width: 36px;
+    }
+  }
+}
+
+// Темная тема
+@media (prefers-color-scheme: dark) {
+  .people {
+    background: #1e293b;
+    color: #f1f5f9;
+
+    &__header {
+      background: #0f172a;
+    }
+
+    &__body {
+      background: #0f172a;
+    }
+
+    &__row {
+      background: #1e293b;
+      color: #f1f5f9;
+
+      &:not(:last-child) {
+        border-bottom-color: #334155;
+      }
+
+      &:hover {
+        background: #334155;
+      }
+    }
+
+    &__cell {
+      &:not(.people__cell--header) {
+        color: #cbd5e1;
+      }
+    }
+
+    &__pagination {
+      background: #1e293b;
+      border-top-color: #334155;
+    }
+
+    &__pagination-btn {
+      background: #334155;
+      border-color: #475569;
+      color: #f1f5f9;
+
+      &:hover:not(:disabled) {
+        background: #3b82f6;
+      }
+
+      &:disabled {
+        background: #1e293b;
+      }
+    }
+
+    &__pagination-page {
+      background: #334155;
+      border-color: #475569;
+      color: #f1f5f9;
+
+      &:hover {
+        background: #475569;
+      }
+
+      &--active {
+        background: #3b82f6;
+      }
+    }
+
+    &__info {
+      background: #0f172a;
+      border-top-color: #334155;
+      color: #94a3b8;
+    }
+  }
+}
